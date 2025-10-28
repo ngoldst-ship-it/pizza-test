@@ -69,7 +69,7 @@ jobs:
       - name: Log in to JFrog Fly Docker Registry
         uses: docker/login-action@v3
         with:
-          registry: mlopsruntime.jfrog.io
+          registry: naftaligtest.jfrog.io
           username: ${{ steps.fly.outputs.username }}
           password: ${{ steps.fly.outputs.token }}
 
