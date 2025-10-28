@@ -1,0 +1,58 @@
+name: 🚀 PIZZa-Frog Release
+on:
+  pull_request:
+    branches: [ main ]
+    types: [closed]
+  workflow_dispatch:
+permissions:
+  contents: write    # Required to push version bump commits
+  id-token: write
+  actions: read
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    # if: github.event.pull_request.merged == true
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        ref: main
+        fetch-depth: 0
+        
+    #########################################################
+    #################### Injected By Fly ####################
+
+    - name: 🐸 JFrog Fly - Set as Default Registry for All Package Managers
+      uses: jfrog/fly-action@v1
+      with:
+        url: https://naftaligdev3.jfrog.io
+        ignore: mvn, maven
+
+    #################### Injected By Fly ####################
+    #########################################################
+
+
+    - name: 🐳 Docker Build and Push - pizza-back
+      shell: bash
+      run: |
+        VERSION=$(date +"%Y.%m.%d-%H.%M.%S")
+        REGISTRY="naftaligdev3.jfrog.io"
+        IMAGE_NAME="$REGISTRY/docker/pizza-app-test:$VERSION"
+        echo "📦 Building Docker version: $VERSION"
+        echo "🌐 Using registry: $REGISTRY"
+        echo "🏷️ Image name: $IMAGE_NAME"
+        
+        # Build the Docker image
+        docker build \
+          --build-arg FLY_REGISTRY_DOMAIN="$REGISTRY" \
+          -t "$IMAGE_NAME" \
+          .
+        
+        # Push
+        docker push "$IMAGE_NAME"
+        
+        echo "✅ Docker image pushed successfully"
+        touch .fly-job-status
