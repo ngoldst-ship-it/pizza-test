@@ -30,7 +30,7 @@ jobs:
       - name: JFrog Fly - Setup npm registry
         uses: jfrog/fly-action@v1
         with:
-          url: https://mlopsruntime.jfrog.io
+          url: https://naftaligtest.jfrog.io
 
       - name: Install dependencies
         run: npm install
@@ -64,7 +64,7 @@ jobs:
         uses: jfrog/fly-action@v1
         id: fly
         with:
-          url: https://mlopsruntime.jfrog.io
+          url: https://naftaligtest.jfrog.io
 
       - name: Log in to JFrog Fly Docker Registry
         uses: docker/login-action@v3
@@ -112,7 +112,7 @@ jobs:
       - name: JFrog Fly - Setup npm registry
         uses: jfrog/fly-action@v1
         with:
-          url: https://mlopsruntime.jfrog.io
+          url: https://naftaligtest.jfrog.io
 
       - name: Install dependencies
         run: npm install
