@@ -80,8 +80,8 @@ jobs:
           context: .
           push: true
           tags: |
-            mlopsruntime.jfrog.io/docker-local/pizza-backend:latest
-            mlopsruntime.jfrog.io/docker-local/pizza-backend:${{ github.sha }}
+            naftaligtest.jfrog.io/docker-local/pizza-backend:latest
+            naftaligtest.jfrog.io/docker-local/pizza-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
