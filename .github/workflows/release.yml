@@ -28,7 +28,7 @@ jobs:
     - name: 🐸 JFrog Fly - Set as Default Registry for All Package Managers
       uses: jfrog/fly-action@v1
       with:
-        url: https://naftaligtest.jfrog.io
+        url: https://naftalig1011.jfrog.io
         ignore: mvn, maven
 
     #################### Injected By Fly ####################
@@ -39,7 +39,7 @@ jobs:
       shell: bash
       run: |
         VERSION=$(date +"%Y.%m.%d-%H.%M.%S")
-        REGISTRY="naftaligtest.jfrog.io"
+        REGISTRY="naftalig1011.jfrog.io"
         IMAGE_NAME="$REGISTRY/docker/pizza-app-test:$VERSION"
         echo "📦 Building Docker version: $VERSION"
         echo "🌐 Using registry: $REGISTRY"
